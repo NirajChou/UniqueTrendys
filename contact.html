@@ -3,45 +3,26 @@
 <head>
     <title>Contact Us - UniqueTrendy</title>
     <style>
-        body { font-family: Arial; background: #f2f2f2; text-align: center; padding: 30px; }
-        h1 { color: #333; }
-        form {
+        body { font-family: Arial; text-align: center; padding: 40px; background: #f9f9f9; }
+        a.button {
             display: inline-block;
-            text-align: left;
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-        input, textarea {
-            width: 300px;
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        button {
-            width: 100%;
-            padding: 10px;
+            padding: 15px 30px;
             background: black;
             color: white;
-            border: none;
-            font-size: 16px;
+            text-decoration: none;
             border-radius: 5px;
+            font-size: 18px;
         }
     </style>
 </head>
 <body>
 
 <h1>Contact Us</h1>
-<p>Fill this form to send us your order or message:</p>
+<p>Click below to place an order or send us your message:</p>
 
-<form action="https://formspree.io/f/mnqevedz" method="POST">
-    <input type="text" name="name" placeholder="Your Name" required><br>
-    <input type="email" name="email" placeholder="Your Email" required><br>
-    <textarea name="message" placeholder="Your Message / Order Details" required></textarea><br>
-    <button type="submit">Send Message</button>
-</form>
+<a href="https://docs.google.com/forms/d/e/1FAIpQLScizc96vhJZItMgYvQn2uSvbADJbUqyiKSs6-R4_7VL-JXFIw/viewform?usp=dialog" class="button" target="_blank">
+    Fill Contact Form
+</a>
 
 <br><br>
 <a href="index.html">Back to Home</a>
