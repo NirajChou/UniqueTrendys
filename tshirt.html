@@ -1,102 +1,128 @@
-<!DOCTYPE html>  
-<html>  
-<head>  
-    <title>UniqueTrendy - T-Shirt Collection</title>  
-    <style>  
-        body {   
-            font-family: Arial;   
-            background: #f7f7f7;   
-            text-align: center;   
-            padding: 20px;   
-        }  
-  
-        h1 { color: #333; }  
-  
-        .product {  
-            display: inline-block;  
-            background: white;  
-            border-radius: 10px;  
-            padding: 15px;  
-            margin: 15px;  
-            width: 250px;  
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);  
-        }  
-  
-        .product img {  
-            width: 100%;  
-            border-radius: 10px;  
-        }  
-  
-        .product h3 {  
-            color: #444;  
-            font-size: 16px;  
-            margin: 10px 0 5px 0;  
-        }  
-  
-        .price {  
-            font-size: 16px;  
-            color: #000;  
-        }  
-  
-        .mrp {  
-            text-decoration: line-through;  
-            color: gray;  
-            margin-left: 5px;  
-        }  
-  
-        .discount {  
-            color: green;  
-            font-size: 14px;  
-            margin-top: 5px;  
-        }  
-  
-        .offer {  
-            font-size: 14px;  
-            color: purple;  
-            font-weight: bold;  
-            margin-top: 5px;  
-        }  
-  
-        .delivery {  
-            font-size: 13px;  
-            color: #008000;  
-            margin-top: 5px;  
-        }  
-  
-        .tag {  
-            background: purple;  
-            color: white;  
-            display: inline-block;  
-            padding: 2px 6px;  
-            border-radius: 4px;  
-            font-size: 12px;  
-            margin-top: 8px;  
+<!DOCTYPE html>
+<html>
+<head>
+    <title>UniqueTrendy - T-Shirt Collection</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: #f7f7f7;
+            padding: 20px;
+            margin: 0;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        .top-bar {
+            position: fixed;
+            top: 10px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .cart-icon {
+            position: relative;
+            cursor: pointer;
+            font-size: 24px;
+            padding: 10px;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 0 5px rgba(0,0,0,0.1);
+        }
+
+        .cart-count {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background-color: red;
+            color: white;
+            font-size: 12px;
+            padding: 2px 5px;
+            border-radius: 50%;
+        }
+
+        .product {
+            display: inline-block;
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px;
+            width: 250px;
+            text-align: center;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        .product img {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .product h3 {
+            color: #444;
+            font-size: 16px;
+            margin: 10px 0 5px 0;
+        }
+
+        .price {
+            font-size: 16px;
+            color: #000;
+        }
+
+        .mrp {
+            text-decoration: line-through;
+            color: gray;
+            margin-left: 5px;
+        }
+
+        .discount {
+            color: green;
+            font-size: 14px;
+        }
+
+        .offer {
+            font-size: 14px;
+            color: purple;
+            font-weight: bold;
+        }
+
+        .delivery {
+            font-size: 13px;
+            color: #008000;
+        }
+
+        .tag {
+            background: purple;
+            color: white;
+            display: inline-block;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 12px;
+            margin-top: 8px;
         }
 
         .btn {
-            display: inline-block;
-            margin-top: 10px;
-            background-color: #007bff;
-            color: white;
             padding: 8px 12px;
-            border-radius: 5px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 14px;
+            margin-top: 10px;
             border: none;
+            border-radius: 5px;
+            color: white;
+            font-weight: bold;
             cursor: pointer;
-        }
-
-        .btn:hover {
-            background-color: #0056b3;
         }
 
         .btn-cart {
             background-color: #28a745;
         }
 
-        .btn-cart:hover {
-            background-color: #1e7e34;
+        .btn-buy {
+            background-color: #007bff;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
         }
 
         #cart-box {
@@ -109,9 +135,10 @@
             margin-left: auto;
             margin-right: auto;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            text-align: center;
         }
-    </style>  
-</head>  
+    </style>
+</head>
 <body>   
 
  
