@@ -1,98 +1,119 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>UniqueTrendy - T-Shirt Collection</title>
-    <style>
-        body { 
-            font-family: Arial; 
-            background: #f7f7f7; 
-            text-align: center; 
-            padding: 20px; 
+<!DOCTYPE html>  
+<html>  
+<head>  
+    <title>UniqueTrendy - T-Shirt Collection</title>  
+    <style>  
+        body {   
+            font-family: Arial;   
+            background: #f7f7f7;   
+            text-align: center;   
+            padding: 20px;   
+        }  
+  
+        h1 { color: #333; }  
+  
+        .product {  
+            display: inline-block;  
+            background: white;  
+            border-radius: 10px;  
+            padding: 15px;  
+            margin: 15px;  
+            width: 250px;  
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);  
+        }  
+  
+        .product img {  
+            width: 100%;  
+            border-radius: 10px;  
+        }  
+  
+        .product h3 {  
+            color: #444;  
+            font-size: 16px;  
+            margin: 10px 0 5px 0;  
+        }  
+  
+        .price {  
+            font-size: 16px;  
+            color: #000;  
+        }  
+  
+        .mrp {  
+            text-decoration: line-through;  
+            color: gray;  
+            margin-left: 5px;  
+        }  
+  
+        .discount {  
+            color: green;  
+            font-size: 14px;  
+            margin-top: 5px;  
+        }  
+  
+        .offer {  
+            font-size: 14px;  
+            color: purple;  
+            font-weight: bold;  
+            margin-top: 5px;  
+        }  
+  
+        .delivery {  
+            font-size: 13px;  
+            color: #008000;  
+            margin-top: 5px;  
+        }  
+  
+        .tag {  
+            background: purple;  
+            color: white;  
+            display: inline-block;  
+            padding: 2px 6px;  
+            border-radius: 4px;  
+            font-size: 12px;  
+            margin-top: 8px;  
         }
 
-        h1 { 
-            color: #333; 
-        }
-
-        .product {
-            display: inline-block;
-            background: white;
-            border-radius: 10px;
-            padding: 15px;
-            margin: 15px;
-            width: 250px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-
-        .product img {
-            width: 100%;
-            border-radius: 10px;
-        }
-
-        .product h3 {
-            color: #444;
-            font-size: 16px;
-            margin: 10px 0 5px 0;
-        }
-
-        .price {
-            font-size: 16px;
-            color: #000;
-        }
-
-        .mrp {
-            text-decoration: line-through;
-            color: gray;
-            margin-left: 5px;
-        }
-
-        .discount {
-            color: green;
-            font-size: 14px;
-            margin-top: 5px;
-        }
-
-        .offer {
-            font-size: 14px;
-            color: purple;
-            font-weight: bold;
-            margin-top: 5px;
-        }
-
-        .delivery {
-            font-size: 13px;
-            color: #008000;
-            margin-top: 5px;
-        }
-
-        .tag {
-            background: purple;
-            color: white;
-            display: inline-block;
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-size: 12px;
-            margin-top: 8px;
-        }
-
-        .whatsapp-btn {
+        .btn {
             display: inline-block;
             margin-top: 10px;
-            background-color: #25D366;
+            background-color: #007bff;
             color: white;
             padding: 8px 12px;
             border-radius: 5px;
             text-decoration: none;
             font-weight: bold;
             font-size: 14px;
+            border: none;
+            cursor: pointer;
         }
 
-        .whatsapp-btn:hover {
-            background-color: #1ebc59;
+        .btn:hover {
+            background-color: #0056b3;
         }
-    </style>
-</head>
-<body>
+
+        .btn-cart {
+            background-color: #28a745;
+        }
+
+        .btn-cart:hover {
+            background-color: #1e7e34;
+        }
+
+        #cart-box {
+            margin-top: 20px;
+            display: none;
+            padding: 15px;
+            background: #fff;
+            border-radius: 10px;
+            width: 280px;
+            margin-left: auto;
+            margin-right: auto;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+    </style>  
+</head>  
+<body>   
+
  
 <h1>Uniquetrendy (T-Shirt Collection)</h1>
 
