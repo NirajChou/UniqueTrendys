@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Your Cart</title>
+  <style>
+    body { font-family: Arial; padding: 20px; }
+    .btn { padding: 10px; background: orange; color: white; border: none; border-radius: 5px; }
+  </style>
+</head>
+<body>
+  <h2>🛒 Your Cart</h2>
+  <div id="cart-items"></div>
+  <button class="btn" onclick="window.location.href='address.html'">Proceed to Address</button>
+
+  <script>
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const container = document.getElementById("cart-items");
+    let total = 0;
+
+    cart.forEach((item, i) => {
+      container.innerHTML += `<p>${i+1}. ${item.name} - ₹${item.price}</p>`;
+      total += item.price;
+    });
+
+    container.innerHTML += `<p><strong>Total: ₹${total}</strong></p>`;
+  </script>
+</body>
+</html>
