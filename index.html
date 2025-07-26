@@ -47,13 +47,6 @@
     <a href="cart.html">🛒 Cart (<span id="cart-count">0</span>)</a>
   </div>
 
-  <div class="product">
-    <h3>Stylish Black T-Shirt</h3>
-    <img src="images/tshirt.jpg" width="100%" />
-    <p>Price: ₹499</p>
-    <button class="btn" onclick="addToCart()">Add to Cart</button>
-  </div>
-
   <script>
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
     document.getElementById("cart-count").innerText = cart.length;
