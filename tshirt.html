@@ -207,6 +207,63 @@
 
 </body>
 </html>
+    <!-- 🛒 Cart Icon on Top -->
+    <div class="top-bar">
+        <div class="cart-icon" onclick="showCart()">
+            🛒
+            <span class="cart-count" id="cart-count">0</span>
+        </div>
+    </div>
+
+    <h1>Our T-Shirt Collection</h1>
+
+    <!-- 🧥 Product Box -->
+    <div class="product">
+        <img src="images/tshirt.jpg" alt="T-Shirt">
+        <h3>Stylish Black T-Shirt</h3>
+        <div class="price">₹499 <span class="mrp">₹799</span></div>
+        <div class="discount">You save ₹300 (38%)</div>
+        <div class="offer">Special Launch Offer</div>
+        <div class="delivery">Free Delivery</div>
+        <div class="tag">Best Seller</div>
+        <br>
+        <button class="btn btn-cart" onclick="addToCart()">Add to Cart</button>
+        <a href="upi://pay?pa=8462849906@naviaxis&pn=UniqueTrendy&am=499&cu=INR">
+            <button class="btn btn-buy">Buy Now</button>
+        </a>
+    </div>
+
+    <!-- 📦 Cart Box -->
+    <div id="cart-box">
+        <h3>🛒 Your Cart</h3>
+        <p>1x Stylish Black T-Shirt - ₹499</p>
+        <a href="upi://pay?pa=8462849906@naviaxis&pn=UniqueTrendy&am=499&cu=INR">
+            <button class="btn btn-buy">Pay with UPI</button>
+        </a>
+    </div>
+
+    <!-- 💻 JavaScript -->
+    <script>
+        let cartCount = 0;
+
+        function addToCart() {
+            cartCount++;
+            document.getElementById("cart-count").innerText = cartCount;
+            document.getElementById("cart-box").style.display = "block";
+            alert("T-shirt added to cart!");
+        }
+
+        function showCart() {
+            document.getElementById("cart-box").style.display = "block";
+        }
+
+        function buyNow() {
+            // Not used anymore, handled by <a> tag
+        }
+    </script>
+
+</body>
+</html>
 
 <br><br>
 <a href="index.html" class="button">Back to Home</a>
