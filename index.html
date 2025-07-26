@@ -35,39 +35,36 @@
        <h3>View T-Shirt Collection</h3>
        <p>Click to explore our T-shirts!</p>
    </div>
-</a> <style>
-        body { font-family: Arial; background: #f7f7f7; text-align: center; padding: 20px; }
-        h1 { color: #333; }
-        .product {
-            display: inline-block;
-            background: white;
-            border-radius: 10px;
-            padding: 15px;
-            margin: 15px;
-            width: 250px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-        .product img {
-            width: 100%;
-            border-radius: 10px;
-        }
-        .price { 
-            font-size: 20px;
-            color: green;
-            margin: 10px 0;
-        }
-        .button {
-            background: black;
-            color: white;
-            padding: 10px 20px;
-            text-decoration: none;
-            border-radius: 5px;
-            display: inline-block;
-        }
-    </style>
+</a> <<style>
+    body { font-family: Arial; padding: 20px; background: #f2f2f2; }
+    .product { background: white; padding: 15px; width: 250px; margin: auto; text-align: center; border-radius: 10px; box-shadow: 0 0 10px #ccc; }
+    .btn { padding: 10px 15px; background: green; color: white; border: none; border-radius: 5px; margin-top: 10px; }
+    .cart-link { position: fixed; top: 10px; right: 20px; font-size: 18px; }
+  </style>
 </head>
 <body>
+  <div class="cart-link">
+    <a href="cart.html">🛒 Cart (<span id="cart-count">0</span>)</a>
+  </div>
 
+  <div class="product">
+    <h3>Stylish Black T-Shirt</h3>
+    <img src="images/tshirt.jpg" width="100%" />
+    <p>Price: ₹499</p>
+    <button class="btn" onclick="addToCart()">Add to Cart</button>
+  </div>
+
+  <script>
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    document.getElementById("cart-count").innerText = cart.length;
+
+    function addToCart() {
+      cart.push({ name: "Stylish Black T-Shirt", price: 499 });
+      localStorage.setItem("cart", JSON.stringify(cart));
+      document.getElementById("cart-count").innerText = cart.length;
+      alert("Product added to cart!");
+    }
+  </script>
 </body>
 </html>
     <div class="product">
