@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Address</title>
+  <style>
+    body { font-family: Arial; padding: 20px; }
+    input, textarea { width: 100%; margin: 10px 0; padding: 10px; }
+    .btn { padding: 10px; background: green; color: white; border: none; border-radius: 5px; }
+  </style>
+</head>
+<body>
+  <h2>Enter Your Address</h2>
+  <form onsubmit="saveAddress(event)">
+    <input type="text" id="name" placeholder="Your Name" required>
+    <input type="text" id="phone" placeholder="Phone Number" required>
+    <textarea id="address" placeholder="Full Address" required></textarea>
+    <button class="btn" type="submit">Continue to Summary</button>
+  </form>
+
+  <script>
+    function saveAddress(e) {
+      e.preventDefault();
+      const address = {
+        name: document.getElementById("name").value,
+        phone: document.getElementById("phone").value,
+        address: document.getElementById("address").value
+      };
+      localStorage.setItem("address", JSON.stringify(address));
+      window.location.href = "summary.html";
+    }
+  </script>
+</body>
+</html>
