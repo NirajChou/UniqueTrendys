@@ -1,76 +1,175 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UniqueTrendy - Trendy Clothing</title>
+    <title>UniqueTrendy Store - Stylish T-Shirts</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 0; background: #f8f8f8; color: #333; }
-        header { background: #000; color: #fff; padding: 20px; text-align: center; font-size: 24px; }
-        nav { background: #333; text-align: center; }
-        nav a { color: #fff; padding: 14px 20px; display: inline-block; text-decoration: none; }
-        nav a:hover { background: #444; }
-        .hero { background: #e0e0e0; padding: 50px; text-align: center; font-size: 20px; }
-        .products { display: flex; flex-wrap: wrap; justify-content: center; padding: 20px; }
-        .product { background: #fff; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); margin: 10px; padding: 15px; width: 200px; text-align: center; }
-        .product img { width: 100%; border-radius: 5px; }
-        footer { background: #000; color: #fff; text-align: center; padding: 15px; margin-top: 30px; }
-</style>
-</head>
-<body><header>
-    UniqueTrendy
-</header><nav>
-      <a href="index.html" title="Home">
-  <img src="images/home-icon.png" alt="Home" width="30">
-</a>
-    <a href="#">Shop</a>
-    <a href="#">About Us</a>
-    <a href="contact.html" class="button">Contact Us</a>
-</nav><section class="hero">
-    <h1>Welcome to UniqueTrendy</h1>
-    <p>Your ultimate destination for stylish and affordable clothing!</p>
-</section><section class="products">
-    <a href="tshirt.html">
-   <div class="product">
-       <img src="https://your-image-link.com/tshirt.jpg" alt="T-shirt">
-       <h3>View T-Shirt Collection</h3>
-       <p>Click to explore our T-shirts!</p>
-   </div>
-</a> <<style>
-    body { font-family: Arial; padding: 20px; background: #f2f2f2; }
-    .product { background: white; padding: 15px; width: 250px; margin: auto; text-align: center; border-radius: 10px; box-shadow: 0 0 10px #ccc; }
-    .btn { padding: 10px 15px; background: green; color: white; border: none; border-radius: 5px; margin-top: 10px; }
-    .cart-link { position: fixed; top: 10px; right: 20px; font-size: 18px; }
-  </style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .cart-icon {
+            position: fixed;
+            top: 10px;
+            right: 20px;
+            font-size: 20px;
+            background: white;
+            padding: 8px 15px;
+            border-radius: 25px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            cursor: pointer;
+        }
+
+        .product {
+            background: white;
+            padding: 15px;
+            margin: 15px auto;
+            max-width: 300px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px #ccc;
+            text-align: center;
+        }
+
+        .product img {
+            width: 100%;
+            border-radius: 8px;
+        }
+
+        .btn {
+            padding: 10px 15px;
+            margin: 10px 5px;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .btn-add { background-color: #28a745; }
+        .btn-order { background-color: #007bff; }
+        .btn-pay { background-color: orange; }
+
+        #cart-box, #address-form {
+            display: none;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 400px;
+            margin: 20px auto;
+            box-shadow: 0 0 10px #aaa;
+        }
+
+        input, textarea {
+            width: 100%;
+            margin: 10px 0;
+            padding: 10px;
+            font-size: 14px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .label {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
-  <div class="cart-link">
-    <a href="cart.html">🛒 Cart (<span id="cart-count">0</span>)</a>
-  </div>
 
-  <script>
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
-    document.getElementById("cart-count").innerText = cart.length;
+    <div class="cart-icon" onclick="showCart()">
+        🛒 Cart (<span id="cart-count">0</span>)
+    </div>
 
-    function addToCart() {
-      cart.push({ name: "Stylish Black T-Shirt", price: 499 });
-      localStorage.setItem("cart", JSON.stringify(cart));
-      document.getElementById("cart-count").innerText = cart.length;
-      alert("Product added to cart!");
-    }
-  </script>
+    <h1>UniqueTrendy T-Shirts</h1>
+
+    <!-- Product -->
+    <div class="product">
+        <img src="images/tshirt.jpg" alt="T-Shirt" />
+        <h3>Stylish Black T-Shirt</h3>
+        <p><strong>₹499</strong> <span style="color: gray; text-decoration: line-through;">₹799</span></p>
+        <button class="btn btn-add" onclick="addToCart()">Add to Cart</button>
+    </div>
+
+    <!-- Cart Box -->
+    <div id="cart-box">
+        <h3>🛒 Your Cart</h3>
+        <div id="cart-items"></div>
+        <p><strong>Total: ₹<span id="cart-total">0</span></strong></p>
+        <button class="btn btn-pay" onclick="showAddress()">Enter Address</button>
+    </div>
+
+    <!-- Address Form -->
+    <div id="address-form">
+        <h3>🏠 Your Address</h3>
+        <input type="text" id="name" placeholder="Your Name" required />
+        <input type="text" id="phone" placeholder="Phone Number" required />
+        <textarea id="address" placeholder="Full Address" required></textarea>
+        <button class="btn btn-order" onclick="placeOrder()">Order on WhatsApp</button>
+    </div>
+
+    <!-- Script -->
+    <script>
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        document.getElementById("cart-count").innerText = cart.length;
+
+        function addToCart() {
+            cart.push({ name: "Stylish Black T-Shirt", price: 499 });
+            localStorage.setItem("cart", JSON.stringify(cart));
+            document.getElementById("cart-count").innerText = cart.length;
+            alert("Added to cart!");
+        }
+
+        function showCart() {
+            const cartBox = document.getElementById("cart-box");
+            const items = document.getElementById("cart-items");
+            const totalSpan = document.getElementById("cart-total");
+            let total = 0;
+            items.innerHTML = "";
+
+            cart.forEach((item, i) => {
+                items.innerHTML += `<p>${i + 1}. ${item.name} - ₹${item.price}</p>`;
+                total += item.price;
+            });
+
+            totalSpan.innerText = total;
+            cartBox.style.display = "block";
+            document.getElementById("address-form").style.display = "none";
+        }
+
+        function showAddress() {
+            document.getElementById("address-form").style.display = "block";
+        }
+
+        function placeOrder() {
+            const name = document.getElementById("name").value.trim();
+            const phone = document.getElementById("phone").value.trim();
+            const addr = document.getElementById("address").value.trim();
+
+            if (!name || !phone || !addr) {
+                alert("Please fill all address details!");
+                return;
+            }
+
+            let message = `🛍️ Order Details:\n\n`;
+            let total = 0;
+            cart.forEach((item, i) => {
+                message += `${i + 1}. ${item.name} - ₹${item.price}\n`;
+                total += item.price;
+            });
+            message += `\nTotal: ₹${total}\n\n👤 Name: ${name}\n📞 Phone: ${phone}\n🏠 Address: ${addr}`;
+
+            const phoneNumber = "918462849906";
+            const whatsappLink = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+            window.open(whatsappLink, "_blank");
+        }
+    </script>
+
 </body>
-</html>
-    <div class="product">
-       <a href="Bottom.html" class="button">Shop Bottom</a>
-        <h3>Stylish Bottom</h3>
-        <p>₹499</p>
-    </div>
-    <div class="product">
-        <img src="https://via.placeholder.com/200x200" alt="Accessories">
-        <h3>Classic accessories</h3><a href="Accessories.html" class="button">Accessories</a>
-        <p>₹699</p>
-    </div>
-</section><footer>
-    © 2025 UniqueTrendy. All rights reserved.
-</footer></body>
 </html>
