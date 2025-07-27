@@ -416,5 +416,34 @@
         window.openCart = openCart;
         window.closeCart = closeCart;
     </script>
+function showAddressForm() {
+    document.getElementById('address-form').style.display = 'block';
+}
+
+function sendOrder() {
+    const name = document.getElementById('custName').value.trim();
+    const phone = document.getElementById('custPhone').value.trim();
+    const address = document.getElementById('custAddress').value.trim();
+
+    if (!name || !phone || !address) {
+        alert('Please fill all the fields');
+        return;
+    }
+
+    // Create cart summary
+    let summary = "🛒 *Order Details:*\n";
+    cart.forEach(item => {
+        summary += `- ${item.title} x${item.quantity} = ₹${item.price * item.quantity}\n`;
+    });
+
+    let total = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
+
+    summary += `\n*Total: ₹${total}*\n\n`;
+    summary += `📦 *Customer Details:*\n`;
+    summary += `👤 Name: ${name}\n📱 Phone: ${phone}\n🏠 Address: ${address}`;
+
+    const url = `https://wa.me/918462849906?text=${encodeURIComponent(summary)}`;
+    window.open(url, '_blank');
+}
 </body>
 </html>
