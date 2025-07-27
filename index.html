@@ -1,227 +1,413 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>UniqueTrendy - Online Shopping</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet"/>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
-    body { background: #f1f3f6; color: #212121; }
-
-    header {
-      background-color: #2874f0;
-      color: white;
-      padding: 10px 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-
-    .logo { font-size: 24px; font-weight: bold; }
-
-    .search-bar input {
-      padding: 8px 12px;
-      width: 250px;
-      border: none;
-      border-radius: 4px;
-    }
-
-    nav {
-      display: flex;
-      gap: 15px;
-      flex-wrap: wrap;
-    }
-
-    nav a {
-      color: white;
-      text-decoration: none;
-      font-weight: 600;
-    }
-
-    .cart {
-      position: relative;
-    }
-
-    .cart span {
-      position: absolute;
-      top: -8px;
-      right: -8px;
-      background: yellow;
-      color: black;
-      font-size: 12px;
-      padding: 2px 6px;
-      border-radius: 50%;
-    }
-
-    .category-bar {
-      background: white;
-      display: flex;
-      overflow-x: auto;
-      padding: 10px 20px;
-      gap: 20px;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
-    }
-
-    .category-bar a {
-      color: #333;
-      text-decoration: none;
-      font-weight: 500;
-      white-space: nowrap;
-    }
-
-    .hero {
-      background: white;
-      padding: 40px;
-      text-align: center;
-      font-size: 18px;
-      margin: 20px;
-      border-radius: 8px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    }
-
-    .products {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-      gap: 20px;
-      padding: 20px;
-    }
-
-    .product {
-      background: white;
-      padding: 15px;
-      border-radius: 8px;
-      box-shadow: 0 1px 6px rgba(0,0,0,0.1);
-      text-align: center;
-      transition: transform 0.3s ease;
-      position: relative;
-    }
-
-    .product:hover {
-      transform: translateY(-5px);
-    }
-
-    .product img {
-      width: 100%;
-      height: 230px;
-      object-fit: cover;
-      border-radius: 6px;
-    }
-
-    .wishlist {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      font-size: 18px;
-      color: #ff5252;
-      cursor: pointer;
-    }
-
-    .product h3 {
-      margin: 10px 0 5px;
-      font-size: 16px;
-    }
-
-    .product .price {
-      color: #388e3c;
-      font-weight: bold;
-      margin-bottom: 5px;
-    }
-
-    .product .badge {
-      font-size: 12px;
-      color: #fff;
-      background: #388e3c;
-      padding: 2px 6px;
-      border-radius: 4px;
-      display: inline-block;
-      margin-bottom: 5px;
-    }
-
-    .product a.button {
-      display: inline-block;
-      background: #ff9f00;
-      color: white;
-      padding: 8px 12px;
-      text-decoration: none;
-      border-radius: 4px;
-      margin-top: 5px;
-    }
-
-    footer {
-      background: #2874f0;
-      color: white;
-      text-align: center;
-      padding: 15px;
-      margin-top: 30px;
-    }
-  </style>
+    <base target="_self">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopEasy - Online Shopping</title>
+    <meta name="description" content="India's leading online shopping destination">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#2874f0",
+                        secondary: "#fb641b",
+                        accent: "#ff9f00",
+                        dark: "#212121",
+                        light: "#f1f3f6"
+                    },
+                    fontFamily: {
+                        sans: ['Roboto', 'Arial', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+    </style>
 </head>
-<body>
-  <header>
-    <div class="logo">UniqueTrendy</div>
-    <div class="search-bar">
-      <input type="text" placeholder="Search for products, brands..."/>
+<body class="bg-gray-50 font-sans">
+    <!-- Header -->
+    <header class="bg-primary text-white sticky top-0 z-50 shadow-md">
+        <div class="container mx-auto px-4">
+            <!-- Top Header -->
+            <div class="flex items-center justify-between py-2">
+                <div class="flex items-center space-x-10">
+                    <a href="#" class="text-2xl font-bold">ShopEasy</a>
+                    <div class="hidden md:flex items-center bg-white rounded-sm">
+                        <input type="text" placeholder="Search for products..." class="px-4 py-2 w-96 text-gray-800 focus:outline-none">
+                        <button class="bg-accent px-6 py-2 text-white"><i class="fas fa-search"></i></button>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-6">
+                    <a href="#" class="hover:text-gray-200"><i class="fas fa-user mr-1"></i> Login</a>
+                    <a href="#" class="hover:text-gray-200"><i class="fas fa-shopping-cart mr-1"></i> Cart</a>
+                </div>
+            </div>
+
+            <!-- Categories -->
+            <nav class="flex items-center space-x-6 py-2 text-sm">
+                <div class="dropdown relative">
+                    <button class="flex items-center hover:text-gray-200">
+                        <i class="fas fa-bars mr-1"></i> Categories
+                    </button>
+                    <div class="dropdown-menu absolute hidden bg-white text-gray-800 w-48 shadow-lg rounded mt-1">
+                        <a href="#" class="block px-4 py-2 hover:bg-gray-100">Electronics</a>
+                        <a href="#" class="block px-4 py-2 hover:bg-gray-100">Fashion</a>
+                        <a href="#" class="block px-4 py-2 hover:bg-gray-100">Home & Kitchen</a>
+                        <a href="#" class="block px-4 py-2 hover:bg-gray-100">Beauty</a>
+                    </div>
+                </div>
+                <a href="#" class="hover:text-gray-200">Offers</a>
+                <a href="#" class="hover:text-gray-200">New Launches</a>
+                <a href="#" class="hover:text-gray-200">Customer Service</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-6">
+        <!-- Hero Banner -->
+        <div class="bg-gradient-to-r from-primary to-accent rounded-lg p-8 mb-8 text-white">
+            <h1 class="text-4xl font-bold mb-4">Great Indian Festival</h1>
+            <p class="text-xl mb-6">Up to 70% off on all products</p>
+            <button class="bg-white text-primary px-6 py-2 rounded font-medium">Shop Now</button>
+        </div>
+
+        <!-- Products Section -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-bold mb-6">Featured Products</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6" id="products-container">
+                <!-- Products will be dynamically inserted here -->
+            </div>
+        </section>
+
+        <!-- Deals Section -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-bold mb-6">Today's Deals</h2>
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="border rounded-lg p-4 flex flex-col items-center">
+                        <img src="https://picsum.photos/200?random=11" alt="Deal product" class="w-40 h-40 object-contain mb-4">
+                        <h3 class="font-medium text-lg">Smart Watch</h3>
+                        <div class="text-secondary font-bold my-2">₹1,999 <span class="text-gray-500 line-through text-sm">₹3,999</span></div>
+                        <button class="bg-primary text-white px-4 py-1 rounded text-sm">Add to Cart</button>
+                    </div>
+                    <div class="border rounded-lg p-4 flex flex-col items-center">
+                        <img src="https://picsum.photos/200?random=12" alt="Deal product" class="w-40 h-40 object-contain mb-4">
+                        <h3 class="font-medium text-lg">Wireless Earbuds</h3>
+                        <div class="text-secondary font-bold my-2">₹1,299 <span class="text-gray-500 line-through text-sm">₹2,499</span></div>
+                        <button class="bg-primary text-white px-4 py-1 rounded text-sm">Add to Cart</button>
+                    </div>
+                    <div class="border rounded-lg p-4 flex flex-col items-center">
+                        <img src="https://picsum.photos/200?random=13" alt="Deal product" class="w-40 h-40 object-contain mb-4">
+                        <h3 class="font-medium text-lg">Power Bank</h3>
+                        <div class="text-secondary font-bold my-2">₹899 <span class="text-gray-500 line-through text-sm">₹1,599</span></div>
+                        <button class="bg-primary text-white px-4 py-1 rounded text-sm">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-lg font-medium mb-4">ABOUT</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Contact Us</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">About Us</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Careers</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-medium mb-4">HELP</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Payments</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Shipping</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Returns</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-medium mb-4">POLICY</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Return Policy</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Terms of Use</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Security</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-medium mb-4">SOCIAL</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>© 2023 ShopEasy. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Shopping Cart Modal -->
+    <div id="cart-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden">
+        <div class="absolute right-0 top-0 h-full bg-white w-full max-w-md overflow-y-auto">
+            <div class="p-4 border-b flex justify-between items-center">
+                <h3 class="text-lg font-medium">My Cart (3)</h3>
+                <button id="close-cart" class="text-gray-500"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="p-4 space-y-4" id="cart-items">
+                <!-- Cart items will be inserted here -->
+            </div>
+            <div class="p-4 border-t">
+                <div class="flex justify-between mb-4">
+                    <span>Total:</span>
+                    <span class="font-bold">₹5,997</span>
+                </div>
+                <button class="w-full bg-secondary text-white py-2 rounded">Proceed to Checkout</button>
+            </div>
+        </div>
     </div>
-    <nav>
-      <a href="#">Home</a>
-      <a href="#">Shop</a>
-      <a href="contact.html">Contact</a>
-      <a href="#" class="cart">🛒 Cart <span id="cart-count">0</span></a>
-    </nav>
-  </header>
 
-  <div class="category-bar">
-    <a href="#">T-Shirts</a>
-    <a href="#">Jeans</a>
-    <a href="#">Shoes</a>
-    <a href="#">Watches</a>
-    <a href="#">Accessories</a>
-    <a href="#">Offers</a>
-  </div>
+    <script>
+        // Product Data - You just need to add price, photo and title here
+        const products = [
+            {
+                id: 1,
+                title: "Smartphone X",
+                price: 19999,
+                image: "https://picsum.photos/200?random=1",
+                rating: 4,
+                discount: 15
+            },
+            {
+                id: 2,
+                title: "Wireless Headphones",
+                price: 2499,
+                image: "https://picsum.photos/200?random=2",
+                rating: 4.5,
+                discount: 20
+            },
+            {
+                id: 3,
+                title: "Smart TV 55\"",
+                price: 45999,
+                image: "https://picsum.photos/200?random=3",
+                rating: 4.2,
+                discount: 10
+            },
+            {
+                id: 4,
+                title: "Laptop Pro",
+                price: 64999,
+                image: "https://picsum.photos/200?random=4",
+                rating: 4.7,
+                discount: 12
+            },
+            {
+                id: 5,
+                title: "Fitness Band",
+                price: 1999,
+                image: "https://picsum.photos/200?random=5",
+                rating: 3.8,
+                discount: 25
+            },
+            {
+                id: 6,
+                title: "Bluetooth Speaker",
+                price: 1499,
+                image: "https://picsum.photos/200?random=6",
+                rating: 4.1,
+                discount: 30
+            },
+            {
+                id: 7,
+                title: "Digital Camera",
+                price: 32999,
+                image: "https://picsum.photos/200?random=7",
+                rating: 4.3,
+                discount: 8
+            },
+            {
+                id: 8,
+                title: "Gaming Console",
+                price: 39999,
+                image: "https://picsum.photos/200?random=8",
+                rating: 4.6,
+                discount: 5
+            }
+        ];
 
-  <section class="hero">
-    <h2>End of Season Sale is Live!</h2>
-    <p>Flat 50% off on all new arrivals. Shop now before it’s gone.</p>
-  </section>
+        // Cart Data
+        let cart = [
+            {
+                id: 1,
+                title: "Smartphone X",
+                price: 19999,
+                image: "https://picsum.photos/200?random=1",
+                quantity: 1
+            },
+            {
+                id: 2,
+                title: "Wireless Headphones",
+                price: 2499,
+                image: "https://picsum.photos/200?random=2",
+                quantity: 2
+            }
+        ];
 
-  <section class="products">
-    <div class="product">
-      <div class="wishlist">♥</div>
-      <img src="https://your-image-link.com/tshirt.jpg" alt="T-shirt" />
-      <h3>Black T-Shirt</h3>
-      <div class="badge">Free Delivery</div>
-      <div class="price">₹499</div>
-      <a href="tshirt.html" class="button">Buy Now</a>
-    </div>
+        // DOM Elements
+        const productsContainer = document.getElementById('products-container');
+        const cartModal = document.getElementById('cart-modal');
+        const cartItemsContainer = document.getElementById('cart-items');
+        const closeCartBtn = document.getElementById('close-cart');
 
-    <div class="product">
-      <div class="wishlist">♥</div>
-      <img src="https://via.placeholder.com/250x250" alt="Bottom" />
-      <h3>Denim Jeans</h3>
-      <div class="badge">4.3 ★ Rating</div>
-      <div class="price">₹799</div>
-      <a href="Bottom.html" class="button">Buy Now</a>
-    </div>
+        // Render Products
+        function renderProducts() {
+            productsContainer.innerHTML = '';
+            products.forEach(product => {
+                const discountedPrice = product.price - (product.price * product.discount / 100);
+                
+                const productCard = document.createElement('div');
+                productCard.className = 'bg-white rounded-lg shadow-md overflow-hidden product-card transition-all duration-300';
+                productCard.innerHTML = `
+                    <div class="p-4">
+                        <img src="${product.image}" alt="${product.title}" class="w-full h-48 object-contain mb-4" loading="lazy">
+                        <h3 class="font-medium text-lg mb-1">${product.title}</h3>
+                        <div class="flex items-center mb-2">
+                            ${renderRating(product.rating)}
+                            <span class="text-gray-500 text-sm ml-1">(${product.rating})</span>
+                        </div>
+                        <div class="mb-2">
+                            <span class="text-xl font-bold">₹${discountedPrice.toLocaleString()}</span>
+                            <span class="text-gray-500 line-through ml-2">₹${product.price.toLocaleString()}</span>
+                            <span class="text-green-600 text-sm ml-2">${product.discount}% off</span>
+                        </div>
+                        <button class="w-full bg-primary text-white py-2 rounded hover:bg-blue-600 transition-colors" 
+                                onclick="addToCart(${product.id})">
+                            Add to Cart
+                        </button>
+                    </div>
+                `;
+                productsContainer.appendChild(productCard);
+            });
+        }
 
-    <div class="product">
-      <div class="wishlist">♥</div>
-      <img src="https://via.placeholder.com/250x250" alt="Watch" />
-      <h3>Trendy Watch</h3>
-      <div class="badge">Free Delivery</div>
-      <div class="price">₹999</div>
-      <a href="Accessories.html" class="button">Buy Now</a>
-    </div>
-  </section>
+        // Render Rating Stars
+        function renderRating(rating) {
+            let stars = '';
+            for (let i = 1; i <= 5; i++) {
+                if (i <= Math.floor(rating)) {
+                    stars += '<i class="fas fa-star text-yellow-400"></i>';
+                } else if (i - 0.5 <= rating) {
+                    stars += '<i class="fas fa-star-half-alt text-yellow-400"></i>';
+                } else {
+                    stars += '<i class="far fa-star text-yellow-400"></i>';
+                }
+            }
+            return stars;
+        }
 
-  <footer>
-    © 2025 UniqueTrendy. All rights reserved.
-  </footer>
+        // Render Cart Items
+        function renderCart() {
+            cartItemsContainer.innerHTML = '';
+            cart.forEach(item => {
+                const cartItem = document.createElement('div');
+                cartItem.className = 'flex border-b pb-4';
+                cartItem.innerHTML = `
+                    <img src="${item.image}" alt="${item.title}" class="w-20 h-20 object-contain mr-4">
+                    <div class="flex-1">
+                        <h4 class="font-medium">${item.title}</h4>
+                        <div class="text-gray-600">₹${item.price.toLocaleString()}</div>
+                        <div class="flex items-center mt-2">
+                            <button class="w-6 h-6 border rounded flex items-center justify-center" onclick="updateQuantity(${item.id}, -1)">-</button>
+                            <span class="mx-2">${item.quantity}</span>
+                            <button class="w-6 h-6 border rounded flex items-center justify-center" onclick="updateQuantity(${item.id}, 1)">+</button>
+                        </div>
+                    </div>
+                    <div class="font-bold">₹${(item.price * item.quantity).toLocaleString()}</div>
+                `;
+                cartItemsContainer.appendChild(cartItem);
+            });
+        }
 
-  <script>
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
-    document.getElementById("cart-count").innerText = cart.length;
-  </script>
+        // Cart Functions
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            const existingItem = cart.find(item => item.id === productId);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    id: product.id,
+                    title: product.title,
+                    price: product.price - (product.price * product.discount / 100),
+                    image: product.image,
+                    quantity: 1
+                });
+            }
+            
+            renderCart();
+            alert(`${product.title} added to cart!`);
+        }
+
+        function updateQuantity(productId, change) {
+            const item = cart.find(item => item.id === productId);
+            if (item) {
+                item.quantity += change;
+                if (item.quantity <= 0) {
+                    cart = cart.filter(item => item.id !== productId);
+                }
+                renderCart();
+            }
+        }
+
+        function openCart() {
+            cartModal.classList.remove('hidden');
+            renderCart();
+        }
+
+        function closeCart() {
+            cartModal.classList.add('hidden');
+        }
+
+        // Event Listeners
+        document.addEventListener('DOMContentLoaded', () => {
+            renderProducts();
+            
+            // Add click event to all cart buttons
+            document.querySelectorAll('[href="#"].hover\\:text-gray-200').forEach(btn => {
+                if (btn.textContent.includes('Cart')) {
+                    btn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        openCart();
+                    });
+                }
+            });
+        });
+
+        closeCartBtn.addEventListener('click', closeCart);
+
+        // Make functions available globally
+        window.addToCart = addToCart;
+        window.updateQuantity = updateQuantity;
+        window.openCart = openCart;
+        window.closeCart = closeCart;
+    </script>
 </body>
 </html>
