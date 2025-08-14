@@ -1,92 +1,136 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mehndi Designs Catalogue</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #fff8f0;
-      margin: 0;
-      padding: 0;
-    }
-    header {
-      text-align: center;
-      background: #a0522d;
-      color: white;
-      padding: 1rem;
-    }
-    h2 {
-      margin-top: 40px;
-      color: #a0522d;
-      text-align: center;
-    }
-    .gallery {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 15px;
-      padding: 20px;
-    }
-    .gallery img {
-      width: 300px;
-      height: 400px;
-      object-fit: cover;
-      border-radius: 10px;
-      transition: transform 0.3s ease;
-    }
-    .gallery img:hover {
-      transform: scale(1.05);
-    }
-    .back-btn {
-      display: block;
-      margin: 20px auto;
-      text-align: center;
-      background: #a0522d;
-      color: white;
-      padding: 10px 20px;
-      text-decoration: none;
-      border-radius: 5px;
-      width: fit-content;
-    }
-    .back-btn:hover {
-      background: #8b4513;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mehndi Catalog</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #fff8f0;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+        h2 {
+            margin-top: 40px;
+            color: #b85c38;
+        }
+        .card {
+            max-width: 400px;
+            margin: 20px auto;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            background: white;
+            position: relative;
+        }
+        .slider {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        .slider img {
+            width: 100%;
+            border-radius: 15px;
+        }
+        .prev, .next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0,0,0,0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+        }
+        .prev { left: 10px; }
+        .next { right: 10px; }
+        .book-now {
+            display: block;
+            background: #b85c38;
+            color: white;
+            padding: 10px;
+            text-decoration: none;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        .book-now:hover {
+            background: #8b3e23;
+        }
+    </style>
 </head>
 <body>
 
-<header>
-  <h1>Shiv Mehndi Art - Designs Catalogue</h1>
-</header>
+    <h1>Shiv Mehndi Art Catalog</h1>
 
-<a href="index.html" class="back-btn">⬅ Back to Home</a>
+    <!-- Bridal Mehndi -->
+    <h2>Bridal Mehndi</h2>
+    <div class="card">
+        <div class="slider">
+            <img src="images/bridal1.jpg" alt="Bridal Mehndi 1">
+            <img src="images/bridal2.jpg" alt="Bridal Mehndi 2">
+            <img src="images/bridal3.jpg" alt="Bridal Mehndi 3">
+        </div>
+        <button class="prev">&#10094;</button>
+        <button class="next">&#10095;</button>
+        <a class="book-now" href="https://www.instagram.com/shivmehandi.art/profilecard/?igsh=MWJtNjFnM3V5ZGhpNg==" target="_blank">Book Now</a>
+    </div>
 
-<h2>Bridal Mehndi</h2>
-<div class="gallery">
-  <img src="7d33e55d71542482b4df30c579e2c26b.jpg" alt="Bridal Design 1">
-  <img src="images/bridal2.jpg" alt="Bridal Design 2">
-  <img src="images/bridal3.jpg" alt="Bridal Design 3">
-</div>
+    <!-- Arabic Mehndi -->
+    <h2>Arabic Mehndi</h2>
+    <div class="card">
+        <div class="slider">
+            <img src="images/arabic1.jpg" alt="Arabic Mehndi 1">
+            <img src="images/arabic2.jpg" alt="Arabic Mehndi 2">
+            <img src="images/arabic3.jpg" alt="Arabic Mehndi 3">
+        </div>
+        <button class="prev">&#10094;</button>
+        <button class="next">&#10095;</button>
+        <a class="book-now" href="https://www.instagram.com/shivmehandi.art/profilecard/?igsh=MWJtNjFnM3V5ZGhpNg==" target="_blank">Book Now</a>
+    </div>
 
-<h2>Arabic Mehndi</h2>
-<div class="gallery">
-  <img src="images/arabic1.jpg" alt="Arabic Design 1">
-  <img src="images/arabic2.jpg" alt="Arabic Design 2">
-  <img src="images/arabic3.jpg" alt="Arabic Design 3">
-</div>
+    <!-- Simple Mehndi -->
+    <h2>Simple Mehndi</h2>
+    <div class="card">
+        <div class="slider">
+            <img src="images/simple1.jpg" alt="Simple Mehndi 1">
+            <img src="images/simple2.jpg" alt="Simple Mehndi 2">
+            <img src="images/simple3.jpg" alt="Simple Mehndi 3">
+        </div>
+        <button class="prev">&#10094;</button>
+        <button class="next">&#10095;</button>
+        <a class="book-now" href="https://www.instagram.com/shivmehandi.art/profilecard/?igsh=MWJtNjFnM3V5ZGhpNg==" target="_blank">Book Now</a>
+    </div>
 
-<h2>Simple Mehndi</h2>
-<div class="gallery">
-  <img src="images/simple1.jpg" alt="Simple Design 1">
-  <img src="images/simple2.jpg" alt="Simple Design 2">
-  <img src="images/simple3.jpg" alt="Simple Design 3">
-</div>
+    <script>
+        // Slider controls + Auto Slide
+        document.querySelectorAll('.card').forEach(card => {
+            let index = 0;
+            const slider = card.querySelector('.slider');
+            const images = slider.querySelectorAll('img');
+            const total = images.length;
 
-<a class="back-btn" href="https://www.instagram.com/shivmehandi.art/profilecard/?igsh=MWJtNjFnM3V5ZGhpNg==" target="_blank">
-  📩 Book Now on Instagram
-</a>
+            function showSlide(i) {
+                slider.style.transform = `translateX(-${i * 100}%)`;
+            }
+
+            card.querySelector('.prev').addEventListener('click', () => {
+                index = (index - 1 + total) % total;
+                showSlide(index);
+            });
+
+            card.querySelector('.next').addEventListener('click', () => {
+                index = (index + 1) % total;
+                showSlide(index);
+            });
+
+            // Auto slide every 3 seconds
+            setInterval(() => {
+                index = (index + 1) % total;
+                showSlide(index);
+            }, 3000);
+        });
+    </script>
 
 </body>
 </html>
