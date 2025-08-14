@@ -3,110 +3,139 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mehndi Catalog</title>
+<title>Shiv Mehndi Art</title>
 <style>
-    body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        background: linear-gradient(120deg, #fceabb, #f8b500);
-        overflow-x: hidden;
-    }
-    header {
-        text-align: center;
-        padding: 20px;
-        font-size: 2em;
-        font-weight: bold;
-        color: #fff;
-        background: rgba(0,0,0,0.5);
-    }
-    .catalog {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 20px;
-        padding: 20px;
-    }
-    .slider-container {
-        position: relative;
-        overflow: hidden;
-        width: 300px;
-        background: #fff;
-        border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    }
-    .slider {
-        display: flex;
-        transition: transform 0.5s ease;
-    }
-    .slider img {
-        width: 300px;
-        height: 350px;
-        object-fit: cover;
-    }
-    .prev, .next {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        background: rgba(0,0,0,0.5);
-        color: white;
-        border: none;
-        padding: 10px;
-        cursor: pointer;
-        border-radius: 50%;
-    }
-    .prev { left: 10px; }
-    .next { right: 10px; }
-    p {
-        text-align: center;
-        font-weight: bold;
-        padding: 10px;
-    }
-    .book-btn {
-        display: block;
-        text-align: center;
-        margin: 10px auto 20px;
-        background: #ff5722;
-        color: white;
-        padding: 10px 20px;
-        border-radius: 5px;
-        text-decoration: none;
-        font-weight: bold;
-    }
-    .book-btn:hover {
-        background: #e64a19;
-    }
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background: #fffaf0;
+}
+header {
+    text-align: center;
+    padding: 20px;
+    background: #ff6f61;
+    color: white;
+    animation: fadeIn 1.5s ease-in-out;
+}
+h1 {
+    margin: 0;
+}
+.catalog {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 10px;
+}
+.slider-container {
+    position: relative;
+    overflow: hidden;
+    width: 280px;
+    margin: 15px;
+    border: 2px solid #ff6f61;
+    border-radius: 10px;
+    background: white;
+    animation: fadeIn 1.5s ease-in-out;
+}
+.slider {
+    display: flex;
+    transition: transform 0.5s ease;
+}
+.slider img {
+    width: 280px;
+    height: 350px;
+    object-fit: cover;
+}
+.prev, .next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0,0,0,0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 18px;
+    border-radius: 50%;
+}
+.prev { left: 5px; }
+.next { right: 5px; }
+p {
+    text-align: center;
+    background: #ff6f61;
+    color: white;
+    margin: 0;
+    padding: 8px;
+    font-weight: bold;
+}
+.book-btn {
+    display: block;
+    width: 90%;
+    margin: 10px auto 15px;
+    padding: 10px;
+    background: #ff6f61;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+}
+.book-btn:hover {
+    background: #e65c50;
+}
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
 </style>
 </head>
 <body>
 
-<header>🌸 Mehndi Designs Catalog 🌸</header>
+<header>
+    <h1>Shiv Mehndi Art</h1>
+    <p>Bridal, Arabic, and Stylish Mehndi Designs</p>
+</header>
 
 <div class="catalog">
+
     <!-- Bridal Slider -->
     <div class="slider-container">
         <div class="slider">
-            <img src="https://i.ibb.co/4YzJQnV/bridal1.jpg" alt="">
-            <img src="https://i.ibb.co/VmKpMZP/bridal2.jpg" alt="">
-            <img src="https://i.ibb.co/6ry4nnF/bridal3.jpg" alt="">
+            <img src="bridal1.jpg" alt="Bridal 1">
+            <img src="bridal2.jpg" alt="Bridal 2">
+            <img src="bridal3.jpg" alt="Bridal 3">
         </div>
         <button class="prev">&#10094;</button>
         <button class="next">&#10095;</button>
-        <p>Bridal Collection</p>
-        <a href="https://instagram.com/yourusername?text=Hi! I want to book a bridal mehndi." target="_blank" class="book-btn">Book Now</a>
+        <p>Bridal Mehndi</p>
+        <a class="book-btn" href="https://www.instagram.com/shivmehandi.art/profilecard/?igsh=MWJtNjFnM3V5ZGhpNg==" target="_blank">Book Now</a>
     </div>
 
     <!-- Arabic Slider -->
     <div class="slider-container">
         <div class="slider">
-            <img src="https://i.ibb.co/cNXLjkD/arabic1.jpg" alt="">
-            <img src="https://i.ibb.co/PMcsCm7/arabic2.jpg" alt="">
-            <img src="https://i.ibb.co/7yjgkVN/arabic3.jpg" alt="">
+            <img src="arabic1.jpg" alt="Arabic 1">
+            <img src="arabic2.jpg" alt="Arabic 2">
+            <img src="arabic3.jpg" alt="Arabic 3">
         </div>
         <button class="prev">&#10094;</button>
         <button class="next">&#10095;</button>
-        <p>Arabic Collection</p>
-        <a href="https://instagram.com/shivmehandi.art?text=Hi! I want to book an Arabic mehndi." target="_blank" class="book-btn">Book Now</a>
+        <p>Arabic Mehndi</p>
+        <a class="book-btn" href="https://www.instagram.com/shivmehandi.art/profilecard/?igsh=MWJtNjFnM3V5ZGhpNg==" target="_blank">Book Now</a>
     </div>
+
+    <!-- Stylish Slider -->
+    <div class="slider-container">
+        <div class="slider">
+            <img src="stylish1.jpg" alt="Stylish 1">
+            <img src="stylish2.jpg" alt="Stylish 2">
+            <img src="stylish3.jpg" alt="Stylish 3">
+        </div>
+        <button class="prev">&#10094;</button>
+        <button class="next">&#10095;</button>
+        <p>Stylish Mehndi</p>
+        <a class="book-btn" href="https://www.instagram.com/shivmehandi.art/profilecard/?igsh=MWJtNjFnM3V5ZGhpNg==" target="_blank">Book Now</a>
+    </div>
+
 </div>
 
 <script>
@@ -119,7 +148,7 @@ document.querySelectorAll('.slider-container').forEach(container => {
 
     function showSlide(i) {
         index = (i + slides.length) % slides.length;
-        slider.style.transform = `translateX(-${index * 300}px)`;
+        slider.style.transform = `translateX(-${index * 280}px)`;
     }
 
     prev.addEventListener('click', () => showSlide(index - 1));
