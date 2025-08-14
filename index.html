@@ -3,157 +3,264 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Shiv Mehndi Art</title>
+<title>Mehndi Catalog & Booking</title>
 <style>
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    background: #fffaf0;
-}
-header {
-    text-align: center;
-    padding: 20px;
-    background: #ff6f61;
-    color: white;
-    animation: fadeIn 1.5s ease-in-out;
-}
-h1 {
-    margin: 0;
-}
-.catalog {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    padding: 10px;
-}
-.slider-container {
-    position: relative;
-    overflow: hidden;
-    width: 280px;
-    margin: 15px;
-    border: 2px solid #ff6f61;
-    border-radius: 10px;
-    background: white;
-    animation: fadeIn 1.5s ease-in-out;
-}
-.slider {
-    display: flex;
-    transition: transform 0.5s ease;
-}
-.slider img {
-    width: 280px;
-    height: 350px;
-    object-fit: cover;
-}
-.prev, .next {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(0,0,0,0.5);
-    color: white;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-    font-size: 18px;
-    border-radius: 50%;
-}
-.prev { left: 5px; }
-.next { right: 5px; }
-p {
-    text-align: center;
-    background: #ff6f61;
-    color: white;
-    margin: 0;
-    padding: 8px;
-    font-weight: bold;
-}
-.book-btn {
-    display: block;
-    width: 90%;
-    margin: 10px auto 15px;
-    padding: 10px;
-    background: #ff6f61;
-    color: white;
-    text-align: center;
-    text-decoration: none;
-    border-radius: 5px;
-    font-weight: bold;
-}
-.book-btn:hover {
-    background: #e65c50;
-}
-@keyframes fadeIn {
-    from {opacity: 0;}
-    to {opacity: 1;}
-}
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: linear-gradient(to bottom, #fdf6f0, #f8e4d8);
+        color: #333;
+    }
+    header {
+        position: sticky;
+        top: 0;
+        background: rgba(255,255,255,0.9);
+        backdrop-filter: blur(5px);
+        padding: 10px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid #ddd;
+    }
+    header h1 { font-size: 20px; margin: 0; }
+    nav a {
+        margin: 0 10px;
+        text-decoration: none;
+        color: #333;
+        font-weight: bold;
+    }
+    nav a:hover { color: #ff6f61; }
+    .btn {
+        background: #ff6f61;
+        color: white;
+        padding: 8px 16px;
+        border-radius: 20px;
+        border: none;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+    .btn:hover { background: #e85b50; }
+    .hero {
+        text-align: center;
+        padding: 50px 20px;
+        animation: fadeInUp 1s ease-in-out;
+    }
+    .hero h2 { font-size: 28px; margin-bottom: 10px; }
+    .catalog {
+        max-width: 1000px;
+        margin: auto;
+        padding: 20px;
+    }
+    .filters { text-align: center; margin-bottom: 20px; }
+    .filters button {
+        margin: 5px;
+        padding: 8px 14px;
+        border: 1px solid #ff6f61;
+        background: white;
+        color: #ff6f61;
+        border-radius: 20px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+    .filters button.active, .filters button:hover {
+        background: #ff6f61;
+        color: white;
+    }
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 15px;
+    }
+    .card {
+        border-radius: 15px;
+        overflow: hidden;
+        background: white;
+        box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+        transform: scale(0.95);
+        transition: transform 0.3s;
+        position: relative;
+    }
+    .card:hover { transform: scale(1); }
+    .slider {
+        display: flex;
+        transition: transform 0.5s ease;
+    }
+    .slider img {
+        width: 100%;
+        height: 300px;
+        object-fit: cover;
+        flex-shrink: 0;
+    }
+    .card p {
+        padding: 10px;
+        font-weight: bold;
+    }
+    .prev, .next {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(0,0,0,0.5);
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        cursor: pointer;
+        border-radius: 50%;
+    }
+    .prev { left: 10px; }
+    .next { right: 10px; }
+    .booking {
+        background: white;
+        padding: 30px 20px;
+        margin: 30px auto;
+        max-width: 600px;
+        border-radius: 15px;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    }
+    .booking input, .booking select {
+        width: 100%;
+        padding: 10px;
+        margin: 8px 0;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+    }
+    .footer {
+        text-align: center;
+        padding: 15px;
+        font-size: 14px;
+        background: #ff6f61;
+        color: white;
+        margin-top: 30px;
+    }
+    @keyframes fadeInUp {
+        from {opacity: 0; transform: translateY(30px);}
+        to {opacity: 1; transform: translateY(0);}
+    }
 </style>
 </head>
 <body>
 
 <header>
-    <h1>Shiv Mehndi Art</h1>
-    <p>Bridal, Arabic, and Stylish Mehndi Designs</p>
+    <h1>Mehndi by Niraj</h1>
+    <nav>
+        <a href="#catalog">Catalog</a>
+        <a href="#booking">Book</a>
+    </nav>
+    <button class="btn" onclick="bookNow()">Book Now</button>
 </header>
 
-<div class="catalog">
+<section class="hero">
+    <h2>Beautiful Mehndi Designs</h2>
+    <p>Bridal • Arabic • Indian • Minimal</p>
+</section>
 
-    <!-- Bridal Slider -->
-    <div class="slider-container">
-        <div class="slider">
-            <img src="bridal1.jpg" alt="Bridal 1">
-            <img src="bridal2.jpg" alt="Bridal 2">
-            <img src="bridal3.jpg" alt="Bridal 3">
-        </div>
-        <button class="prev">&#10094;</button>
-        <button class="next">&#10095;</button>
-        <p>Bridal Mehndi</p>
-        <a class="book-btn" href="https://www.instagram.com/shivmehandi.art/profilecard/?igsh=MWJtNjFnM3V5ZGhpNg==" target="_blank">Book Now</a>
+<section id="catalog" class="catalog">
+    <div class="filters">
+        <button class="active" onclick="filterItems('all')">All</button>
+        <button onclick="filterItems('bridal')">Bridal</button>
+        <button onclick="filterItems('arabic')">Arabic</button>
+        <button onclick="filterItems('indian')">Indian</button>
+        <button onclick="filterItems('minimal')">Minimal</button>
     </div>
-
-    <!-- Arabic Slider -->
-    <div class="slider-container">
-        <div class="slider">
-            <img src="arabic1.jpg" alt="Arabic 1">
-            <img src="arabic2.jpg" alt="Arabic 2">
-            <img src="arabic3.jpg" alt="Arabic 3">
+    <div class="grid" id="catalogGrid">
+        <div class="card" data-cat="bridal">
+            <div class="slider">
+                <img src="https://images.unsplash.com/photo-1567359781514-3b964e2b04d0?q=80&w=800" alt="">
+                <img src="https://images.unsplash.com/photo-1603297604794-bf3c0e2ad653?q=80&w=800" alt="">
+            </div>
+            <button class="prev">&#10094;</button>
+            <button class="next">&#10095;</button>
+            <p>Full Bridal Intricate</p>
         </div>
-        <button class="prev">&#10094;</button>
-        <button class="next">&#10095;</button>
-        <p>Arabic Mehndi</p>
-        <a class="book-btn" href="https://www.instagram.com/shivmehandi.art/profilecard/?igsh=MWJtNjFnM3V5ZGhpNg==" target="_blank">Book Now</a>
-    </div>
-
-    <!-- Stylish Slider -->
-    <div class="slider-container">
-        <div class="slider">
-            <img src="stylish1.jpg" alt="Stylish 1">
-            <img src="stylish2.jpg" alt="Stylish 2">
-            <img src="stylish3.jpg" alt="Stylish 3">
+        <div class="card" data-cat="arabic">
+            <div class="slider">
+                <img src="https://images.unsplash.com/photo-1576871337622-98d48d1cf531?q=80&w=800" alt="">
+                <img src="https://images.unsplash.com/photo-1594087588830-f9a0a0b2ff78?q=80&w=800" alt="">
+            </div>
+            <button class="prev">&#10094;</button>
+            <button class="next">&#10095;</button>
+            <p>Floral Arabic Flow</p>
         </div>
-        <button class="prev">&#10094;</button>
-        <button class="next">&#10095;</button>
-        <p>Stylish Mehndi</p>
-        <a class="book-btn" href="https://www.instagram.com/shivmehandi.art/profilecard/?igsh=MWJtNjFnM3V5ZGhpNg==" target="_blank">Book Now</a>
+        <div class="card" data-cat="indian">
+            <div class="slider">
+                <img src="https://images.unsplash.com/photo-1573225342350-7854e0e1aace?q=80&w=800" alt="">
+                <img src="https://images.unsplash.com/photo-1551033406-611cf9a28f67?q=80&w=800" alt="">
+            </div>
+            <button class="prev">&#10094;</button>
+            <button class="next">&#10095;</button>
+            <p>Traditional Indian Palm</p>
+        </div>
+        <div class="card" data-cat="minimal">
+            <div class="slider">
+                <img src="https://images.unsplash.com/photo-1563751400496-4e4e21d3d5a3?q=80&w=800" alt="">
+                <img src="https://images.unsplash.com/photo-1590080876715-b3cc6e8aa59c?q=80&w=800" alt="">
+            </div>
+            <button class="prev">&#10094;</button>
+            <button class="next">&#10095;</button>
+            <p>Delicate Minimal Tips</p>
+        </div>
     </div>
+</section>
 
+<section id="booking" class="booking">
+    <h2>Book Your Date</h2>
+    <input type="text" id="name" placeholder="Your Name">
+    <input type="date" id="date">
+    <input type="text" id="city" placeholder="City">
+    <select id="package">
+        <option>Bridal Full Hands + Feet — ₹7,999</option>
+        <option>Engagement / Sagan — ₹3,499</option>
+        <option>Party / Minimal — ₹999</option>
+    </select>
+    <input type="text" id="phone" placeholder="Phone (optional)">
+    <button class="btn" onclick="bookNow()">Send on Instagram</button>
+</section>
+
+<div class="footer">
+    © <span id="year"></span> Mehndi by Niraj. All rights reserved.
 </div>
 
 <script>
-document.querySelectorAll('.slider-container').forEach(container => {
-    let index = 0;
-    const slider = container.querySelector('.slider');
-    const slides = slider.querySelectorAll('img');
-    const prev = container.querySelector('.prev');
-    const next = container.querySelector('.next');
+    const INSTAGRAM_LINK = "https://www.instagram.com/shivmehandi.art/profilecard/?igsh=MWJtNjFnM3V5ZGhpNg==";
 
-    function showSlide(i) {
-        index = (i + slides.length) % slides.length;
-        slider.style.transform = `translateX(-${index * 280}px)`;
+    function filterItems(category) {
+        document.querySelectorAll('.filters button').forEach(btn => btn.classList.remove('active'));
+        event.target.classList.add('active');
+        document.querySelectorAll('.card').forEach(card => {
+            if (category === 'all' || card.dataset.cat === category) {
+                card.style.display = 'block';
+            } else {
+                card.style.display = 'none';
+            }
+        });
     }
 
-    prev.addEventListener('click', () => showSlide(index - 1));
-    next.addEventListener('click', () => showSlide(index + 1));
-});
+    // Slider controls
+    document.querySelectorAll('.card').forEach(card => {
+        let index = 0;
+        const slider = card.querySelector('.slider');
+        const images = slider.querySelectorAll('img');
+        card.querySelector('.prev').addEventListener('click', () => {
+            index = (index - 1 + images.length) % images.length;
+            slider.style.transform = `translateX(-${index * 100}%)`;
+        });
+        card.querySelector('.next').addEventListener('click', () => {
+            index = (index + 1) % images.length;
+            slider.style.transform = `translateX(-${index * 100}%)`;
+        });
+    });
+
+    function bookNow() {
+        const name = document.getElementById("name").value || "-";
+        const date = document.getElementById("date").value || "-";
+        const city = document.getElementById("city").value || "-";
+        const pkg = document.getElementById("package").value || "-";
+        const phone = document.getElementById("phone").value || "-";
+
+        const message = `Hi! I'd like to book a mehndi session.%0AName: ${name}%0ADate: ${date}%0ACity: ${city}%0APackage: ${pkg}%0APhone: ${phone}`;
+        window.open(`${INSTAGRAM_LINK}&text=${message}`, "_blank");
+    }
+
+    document.getElementById("year").textContent = new Date().getFullYear();
 </script>
 
 </body>
