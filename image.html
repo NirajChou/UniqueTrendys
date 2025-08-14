@@ -31,4 +31,62 @@
     }
     .gallery img {
       width: 300px;
-      height
+      height: 400px;
+      object-fit: cover;
+      border-radius: 10px;
+      transition: transform 0.3s ease;
+    }
+    .gallery img:hover {
+      transform: scale(1.05);
+    }
+    .back-btn {
+      display: block;
+      margin: 20px auto;
+      text-align: center;
+      background: #a0522d;
+      color: white;
+      padding: 10px 20px;
+      text-decoration: none;
+      border-radius: 5px;
+      width: fit-content;
+    }
+    .back-btn:hover {
+      background: #8b4513;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Shiv Mehndi Art - Designs Catalogue</h1>
+</header>
+
+<a href="index.html" class="back-btn">⬅ Back to Home</a>
+
+<h2>Bridal Mehndi</h2>
+<div class="gallery">
+  <img src="7d33e55d71542482b4df30c579e2c26b.jpg" alt="Bridal Design 1">
+  <img src="images/bridal2.jpg" alt="Bridal Design 2">
+  <img src="images/bridal3.jpg" alt="Bridal Design 3">
+</div>
+
+<h2>Arabic Mehndi</h2>
+<div class="gallery">
+  <img src="images/arabic1.jpg" alt="Arabic Design 1">
+  <img src="images/arabic2.jpg" alt="Arabic Design 2">
+  <img src="images/arabic3.jpg" alt="Arabic Design 3">
+</div>
+
+<h2>Simple Mehndi</h2>
+<div class="gallery">
+  <img src="images/simple1.jpg" alt="Simple Design 1">
+  <img src="images/simple2.jpg" alt="Simple Design 2">
+  <img src="images/simple3.jpg" alt="Simple Design 3">
+</div>
+
+<a class="back-btn" href="https://www.instagram.com/shivmehandi.art/profilecard/?igsh=MWJtNjFnM3V5ZGhpNg==" target="_blank">
+  📩 Book Now on Instagram
+</a>
+
+</body>
+</html>
