@@ -1,259 +1,215 @@
-import React, { useMemo, useState } from "react"; import { motion, AnimatePresence } from "framer-motion";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mehndi Catalog & Booking</title>
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: linear-gradient(to bottom, #fdf6f0, #f8e4d8);
+        color: #333;
+    }
+    header {
+        position: sticky;
+        top: 0;
+        background: rgba(255,255,255,0.9);
+        backdrop-filter: blur(5px);
+        padding: 10px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid #ddd;
+    }
+    header h1 { font-size: 20px; margin: 0; }
+    nav a {
+        margin: 0 10px;
+        text-decoration: none;
+        color: #333;
+        font-weight: bold;
+    }
+    nav a:hover { color: #ff6f61; }
+    .btn {
+        background: #ff6f61;
+        color: white;
+        padding: 8px 16px;
+        border-radius: 20px;
+        border: none;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+    .btn:hover { background: #e85b50; }
+    .hero {
+        text-align: center;
+        padding: 50px 20px;
+        animation: fadeInUp 1s ease-in-out;
+    }
+    .hero h2 { font-size: 28px; margin-bottom: 10px; }
+    .catalog {
+        max-width: 1000px;
+        margin: auto;
+        padding: 20px;
+    }
+    .filters { text-align: center; margin-bottom: 20px; }
+    .filters button {
+        margin: 5px;
+        padding: 8px 14px;
+        border: 1px solid #ff6f61;
+        background: white;
+        color: #ff6f61;
+        border-radius: 20px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+    .filters button.active, .filters button:hover {
+        background: #ff6f61;
+        color: white;
+    }
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 15px;
+    }
+    .card {
+        border-radius: 15px;
+        overflow: hidden;
+        background: white;
+        box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+        transform: scale(0.95);
+        transition: transform 0.3s;
+    }
+    .card:hover { transform: scale(1); }
+    .card img {
+        width: 100%;
+        display: block;
+        height: 300px;
+        object-fit: cover;
+    }
+    .card p {
+        padding: 10px;
+        font-weight: bold;
+    }
+    .booking {
+        background: white;
+        padding: 30px 20px;
+        margin: 30px auto;
+        max-width: 600px;
+        border-radius: 15px;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    }
+    .booking input, .booking select {
+        width: 100%;
+        padding: 10px;
+        margin: 8px 0;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+    }
+    .footer {
+        text-align: center;
+        padding: 15px;
+        font-size: 14px;
+        background: #ff6f61;
+        color: white;
+        margin-top: 30px;
+    }
+    @keyframes fadeInUp {
+        from {opacity: 0; transform: translateY(30px);}
+        to {opacity: 1; transform: translateY(0);}
+    }
+</style>
+</head>
+<body>
 
-/**
+<header>
+    <h1>Mehndi by Niraj</h1>
+    <nav>
+        <a href="#catalog">Catalog</a>
+        <a href="#booking">Book</a>
+    </nav>
+    <button class="btn" onclick="bookNow()">Book Now</button>
+</header>
 
-⚙️ Quick Setup
+<section class="hero">
+    <h2>Beautiful Mehndi Designs</h2>
+    <p>Bridal • Arabic • Indian • Minimal</p>
+</section>
 
-1. Replace INSTAGRAM_USERNAME with your Instagram handle (no @).
-
-
-
-2. Replace catalog IMAGES with your photos (can be local URLs or hosted links).
-
-
-
-3. (Optional) Edit services/pricing in PACKAGES. */
-
-
-
-
-const INSTAGRAM_USERNAME = "your_instagram_username"; // <-- CHANGE THIS
-
-const CATEGORIES = [ { key: "bridal", label: "Bridal" }, { key: "arabic", label: "Arabic" }, { key: "indian", label: "Indian" }, { key: "minimal", label: "Minimal" }, ];
-
-const IMAGES: { id: string; src: string; cat: string; title: string }[] = [ { id: "1", src: "https://images.unsplash.com/photo-1567359781514-3b964e2b04d0?q=80&w=1200&auto=format&fit=crop", cat: "bridal", title: "Full Bridal Intricate", }, { id: "2", src: "https://images.unsplash.com/photo-1576871337622-98d48d1cf531?q=80&w=1200&auto=format&fit=crop", cat: "arabic", title: "Floral Arabic Flow", }, { id: "3", src: "https://images.unsplash.com/photo-1573225342350-7854e0e1aace?q=80&w=1200&auto=format&fit=crop", cat: "indian", title: "Traditional Indian Palm", }, { id: "4", src: "https://images.unsplash.com/photo-1542978708-1a0e61bedd58?q=80&w=1200&auto=format&fit=crop", cat: "minimal", title: "Delicate Minimal Tips", }, { id: "5", src: "https://images.unsplash.com/photo-1594751543129-6701ad444259?q=80&w=1200&auto=format&fit=crop", cat: "bridal", title: "Bridal Feet Lacework", }, { id: "6", src: "https://images.unsplash.com/photo-1563751400496-4e4e21d3d5a3?q=80&w=1200&auto=format&fit=crop", cat: "arabic", title: "Arabesque Vines", }, ];
-
-const PACKAGES = [ { id: "p1", name: "Bridal Full Hands + Feet", price: "₹7,999", desc: "Up to elbows + full feet, consultation included" }, { id: "p2", name: "Engagement / Sagan", price: "₹3,499", desc: "Front & back hands up to mid-arm" }, { id: "p3", name: "Party / Minimal", price: "₹999", desc: "Minimal chic patterns for one person" }, ];
-
-function createIGDmLink(username: string, message: string) { const base = https://ig.me/m/${username}; // opens Instagram DM const params = new URLSearchParams({ text: message }); return ${base}?${params.toString()}; }
-
-function useFilteredImages(active: string) { return useMemo(() => (active === "all" ? IMAGES : IMAGES.filter((i) => i.cat === active)), [active]); }
-
-export default function MehndiStudioSite() { const [activeCat, setActiveCat] = useState<string>("all"); const [preview, setPreview] = useState<typeof IMAGES[number] | null>(null); const [form, setForm] = useState({ name: "", date: "", city: "", packageId: PACKAGES[0].id, phone: "", });
-
-const filtered = useFilteredImages(activeCat);
-
-const heroTitle = "Mehndi by Niraj"; const heroSubtitle = "Bridal • Arabic • Indian • Minimal";
-
-const handleBookNow = () => { const pkg = PACKAGES.find((p) => p.id === form.packageId)?.name || "Custom"; const msg = Hi! I'd like to book a mehndi session.\n\nName: ${form.name || "-"}\nDate: ${form.date || "-"}\nCity: ${form.city || "-"}\nPackage: ${pkg}\nPhone: ${form.phone || "-"}; const link = createIGDmLink(INSTAGRAM_USERNAME, msg); window.open(link, "_blank"); };
-
-return ( <div className="min-h-screen bg-gradient-to-b from-stone-100 to-stone-200 text-stone-800"> {/* Nav */} <header className="sticky top-0 z-40 backdrop-blur bg-white/60 border-b border-stone-200"> <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between"> <a href="#home" className="font-semibold text-xl tracking-tight">{heroTitle}</a> <nav className="hidden md:flex gap-6 text-sm"> <a href="#catalog" className="hover:opacity-70">Catalog</a> <a href="#packages" className="hover:opacity-70">Packages</a> <a href="#booking" className="hover:opacity-70">Book</a> <a href="#contact" className="hover:opacity-70">Contact</a> </nav> <button onClick={handleBookNow} className="rounded-2xl px-5 py-2 bg-stone-900 text-white hover:opacity-90 transition"> Book Now </button> </div> </header>
-
-{/* Hero */}
-  <section id="home" className="relative overflow-hidden">
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8 }}
-      className="max-w-6xl mx-auto px-4 py-20 grid md:grid-cols-2 gap-10 items-center"
-    >
-      <div>
-        <h1 className="text-4xl md:text-6xl font-bold leading-tight">
-          Timeless Mehndi,
-          <span className="block mt-2 text-stone-500">for your special moments</span>
-        </h1>
-        <p className="mt-5 text-stone-600 max-w-prose">
-          From delicate minimal looks to full bridal intricacy — explore our curated catalog and book your date via Instagram DM in one tap.
-        </p>
-        <div className="mt-8 flex gap-3">
-          <a href="#catalog" className="rounded-2xl px-5 py-2 border border-stone-300 hover:bg-white transition">View Catalog</a>
-          <button onClick={handleBookNow} className="rounded-2xl px-5 py-2 bg-stone-900 text-white hover:opacity-90 transition">Book on Instagram</button>
-        </div>
-      </div>
-
-      {/* Animated card stack */}
-      <div className="relative h-[380px] md:h-[460px]">
-        {[0, 1, 2].map((i) => (
-          <motion.div
-            key={i}
-            initial={{ rotate: -8 + i * 8, y: 40 * i, opacity: 0 }}
-            animate={{ opacity: 1, y: 20 * i }}
-            transition={{ delay: 0.1 * i, type: "spring", stiffness: 80 }}
-            className="absolute inset-0 rounded-3xl shadow-xl overflow-hidden border border-stone-200 bg-white"
-            style={{ translateX: i * 16, translateY: i * 10 }}
-          >
-            <img
-              alt="mehndi showcase"
-              src={IMAGES[i]?.src}
-              className="w-full h-full object-cover"
-            />
-          </motion.div>
-        ))}
-      </div>
-    </motion.div>
-  </section>
-
-  {/* Catalog */}
-  <section id="catalog" className="max-w-6xl mx-auto px-4 py-16">
-    <div className="flex items-end justify-between gap-4">
-      <div>
-        <h2 className="text-3xl md:text-4xl font-semibold">Catalog</h2>
-        <p className="text-stone-600 mt-1">Browse styles and save favorites.</p>
-      </div>
-      <div className="flex flex-wrap gap-2">
-        <button onClick={() => setActiveCat("all")} className={`px-4 py-2 rounded-full border ${activeCat === "all" ? "bg-stone-900 text-white" : "bg-white"}`}>All</button>
-        {CATEGORIES.map((c) => (
-          <button key={c.key} onClick={() => setActiveCat(c.key)} className={`px-4 py-2 rounded-full border ${activeCat === c.key ? "bg-stone-900 text-white" : "bg-white"}`}>{c.label}</button>
-        ))}
-      </div>
+<section id="catalog" class="catalog">
+    <div class="filters">
+        <button class="active" onclick="filterItems('all')">All</button>
+        <button onclick="filterItems('bridal')">Bridal</button>
+        <button onclick="filterItems('arabic')">Arabic</button>
+        <button onclick="filterItems('indian')">Indian</button>
+        <button onclick="filterItems('minimal')">Minimal</button>
     </div>
-
-    <motion.div layout className="mt-8 grid sm:grid-cols-2 md:grid-cols-3 gap-5">
-      <AnimatePresence>
-        {filtered.map((img) => (
-          <motion.figure
-            key={img.id}
-            layout
-            initial={{ opacity: 0, scale: 0.96 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.96 }}
-            className="group rounded-3xl overflow-hidden border border-stone-200 bg-white shadow-sm hover:shadow-md transition cursor-pointer"
-            onClick={() => setPreview(img)}
-          >
-            <div className="relative aspect-[4/5] overflow-hidden">
-              <img src={img.src} alt={img.title} className="w-full h-full object-cover group-hover:scale-105 transition duration-300" />
-              <figcaption className="absolute bottom-0 left-0 right-0 p-3 text-sm bg-gradient-to-t from-black/60 to-transparent text-white">
-                {img.title}
-              </figcaption>
-            </div>
-          </motion.figure>
-        ))}
-      </AnimatePresence>
-    </motion.div>
-  </section>
-
-  {/* Packages */}
-  <section id="packages" className="bg-white border-y border-stone-200">
-    <div className="max-w-6xl mx-auto px-4 py-16">
-      <h2 className="text-3xl md:text-4xl font-semibold">Packages</h2>
-      <p className="text-stone-600 mt-1">Transparent pricing, custom designs on request.</p>
-      <div className="mt-8 grid md:grid-cols-3 gap-5">
-        {PACKAGES.map((p) => (
-          <div key={p.id} className="rounded-3xl border border-stone-200 p-6 bg-stone-50">
-            <div className="text-xl font-semibold">{p.name}</div>
-            <div className="text-3xl mt-2 font-bold">{p.price}</div>
-            <p className="text-stone-600 mt-2 text-sm">{p.desc}</p>
-            <button onClick={() => setForm((f) => ({ ...f, packageId: p.id }))} className="mt-4 w-full rounded-2xl px-4 py-2 bg-stone-900 text-white hover:opacity-90">Select</button>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  {/* Booking */}
-  <section id="booking" className="max-w-6xl mx-auto px-4 py-16">
-    <div className="grid md:grid-cols-2 gap-10 items-start">
-      <div>
-        <h2 className="text-3xl md:text-4xl font-semibold">Book Your Date</h2>
-        <p className="text-stone-600 mt-1">Fill the quick form — it will open Instagram DM with your details pre‑filled.</p>
-
-        <div className="mt-6 grid gap-4">
-          <label className="grid gap-2 text-sm">
-            <span>Name</span>
-            <input value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} className="px-4 py-3 rounded-2xl border border-stone-300 bg-white" placeholder="Your name" />
-          </label>
-          <div className="grid md:grid-cols-2 gap-4">
-            <label className="grid gap-2 text-sm">
-              <span>Event Date</span>
-              <input type="date" value={form.date} onChange={(e) => setForm({ ...form, date: e.target.value })} className="px-4 py-3 rounded-2xl border border-stone-300 bg-white" />
-            </label>
-            <label className="grid gap-2 text-sm">
-              <span>City</span>
-              <input value={form.city} onChange={(e) => setForm({ ...form, city: e.target.value })} className="px-4 py-3 rounded-2xl border border-stone-300 bg-white" placeholder="e.g., Ujjain / Indore / Mumbai" />
-            </label>
-          </div>
-          <label className="grid gap-2 text-sm">
-            <span>Phone (optional)</span>
-            <input value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} className="px-4 py-3 rounded-2xl border border-stone-300 bg-white" placeholder="WhatsApp / Phone" />
-          </label>
-          <label className="grid gap-2 text-sm">
-            <span>Package</span>
-            <select value={form.packageId} onChange={(e) => setForm({ ...form, packageId: e.target.value })} className="px-4 py-3 rounded-2xl border border-stone-300 bg-white">
-              {PACKAGES.map((p) => (
-                <option key={p.id} value={p.id}>{p.name} — {p.price}</option>
-              ))}
-            </select>
-          </label>
-          <div className="flex gap-3">
-            <button onClick={handleBookNow} className="rounded-2xl px-5 py-3 bg-stone-900 text-white hover:opacity-90">Send on Instagram</button>
-            <a
-              href={`https://instagram.com/${INSTAGRAM_USERNAME}`}
-              target="_blank"
-              rel="noreferrer"
-              className="rounded-2xl px-5 py-3 border border-stone-300 bg-white hover:bg-stone-50"
-            >
-              Visit Profile
-            </a>
-          </div>
+    <div class="grid" id="catalogGrid">
+        <div class="card" data-cat="bridal">
+            <img src="https://images.unsplash.com/photo-1567359781514-3b964e2b04d0?q=80&w=800" alt="">
+            <p>Full Bridal Intricate</p>
         </div>
-      </div>
-
-      {/* Side panel */}
-      <div className="rounded-3xl border border-stone-200 p-6 bg-white">
-        <div className="text-lg font-semibold">Why book with us?</div>
-        <ul className="mt-3 space-y-2 text-stone-700 text-sm list-disc pl-5">
-          <li>Skin‑safe natural cones</li>
-          <li>On‑location service available</li>
-          <li>Design preview & customization</li>
-          <li>Transparent pricing, no surprises</li>
-        </ul>
-        <div className="mt-6 text-sm text-stone-500">Have a Pinterest reference? Share it in DM — we’ll match the vibe!</div>
-      </div>
-    </div>
-  </section>
-
-  {/* Contact / Footer */}
-  <section id="contact" className="bg-stone-900 text-stone-100">
-    <div className="max-w-6xl mx-auto px-4 py-12 grid md:grid-cols-3 gap-8">
-      <div>
-        <div className="text-2xl font-semibold">{heroTitle}</div>
-        <p className="mt-2 text-stone-300">Premium mehndi artistry across MP & Maharashtra.</p>
-      </div>
-      <div>
-        <div className="font-semibold">Contact</div>
-        <div className="mt-2 text-stone-300">
-          Instagram: <a className="underline" target="_blank" rel="noreferrer" href={`https://instagram.com/${INSTAGRAM_USERNAME}`}>@{INSTAGRAM_USERNAME}</a>
+        <div class="card" data-cat="arabic">
+            <img src="https://images.unsplash.com/photo-1576871337622-98d48d1cf531?q=80&w=800" alt="">
+            <p>Floral Arabic Flow</p>
         </div>
-      </div>
-      <div>
-        <div className="font-semibold">Quick Links</div>
-        <div className="mt-2 flex flex-col gap-1 text-stone-300">
-          <a href="#catalog" className="hover:opacity-80">Catalog</a>
-          <a href="#packages" className="hover:opacity-80">Packages</a>
-          <a href="#booking" className="hover:opacity-80">Book</a>
+        <div class="card" data-cat="indian">
+            <img src="https://images.unsplash.com/photo-1573225342350-7854e0e1aace?q=80&w=800" alt="">
+            <p>Traditional Indian Palm</p>
         </div>
-      </div>
+        <div class="card" data-cat="minimal">
+            <img src="https://images.unsplash.com/photo-1563751400496-4e4e21d3d5a3?q=80&w=800" alt="">
+            <p>Delicate Minimal Tips</p>
+        </div>
     </div>
-    <div className="text-center text-xs text-stone-400 pb-8">© {new Date().getFullYear()} {heroTitle}. All rights reserved.</div>
-  </section>
+</section>
 
-  {/* Lightbox */}
-  <AnimatePresence>
-    {preview && (
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        className="fixed inset-0 z-50 bg-black/70 grid place-items-center p-6"
-        onClick={() => setPreview(null)}
-      >
-        <motion.div
-          initial={{ scale: 0.95, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          exit={{ scale: 0.95, opacity: 0 }}
-          className="max-w-3xl w-full"
-          onClick={(e) => e.stopPropagation()}
-        >
-          <img src={preview.src} alt={preview.title} className="w-full h-auto rounded-2xl" />
-          <div className="mt-3 flex items-center justify-between text-stone-200">
-            <div className="text-sm">{preview.title}</div>
-            <button onClick={() => setPreview(null)} className="px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20">Close</button>
-          </div>
-        </motion.div>
-      </motion.div>
-    )}
-  </AnimatePresence>
+<section id="booking" class="booking">
+    <h2>Book Your Date</h2>
+    <input type="text" id="name" placeholder="Your Name">
+    <input type="date" id="date">
+    <input type="text" id="city" placeholder="City">
+    <select id="package">
+        <option>Bridal Full Hands + Feet — ₹7,999</option>
+        <option>Engagement / Sagan — ₹3,499</option>
+        <option>Party / Minimal — ₹999</option>
+    </select>
+    <input type="text" id="phone" placeholder="Phone (optional)">
+    <button class="btn" onclick="bookNow()">Send on Instagram</button>
+</section>
+
+<div class="footer">
+    © <span id="year"></span> Mehndi by Niraj. All rights reserved.
 </div>
 
-); }
+<script>
+    const INSTAGRAM_USERNAME = "your_instagram_username"; // change this
 
+    function filterItems(category) {
+        document.querySelectorAll('.filters button').forEach(btn => btn.classList.remove('active'));
+        event.target.classList.add('active');
+        document.querySelectorAll('.card').forEach(card => {
+            if (category === 'all' || card.dataset.cat === category) {
+                card.style.display = 'block';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
+
+    function bookNow() {
+        const name = document.getElementById("name").value || "-";
+        const date = document.getElementById("date").value || "-";
+        const city = document.getElementById("city").value || "-";
+        const pkg = document.getElementById("package").value || "-";
+        const phone = document.getElementById("phone").value || "-";
+
+        const message = `Hi! I'd like to book a mehndi session.%0AName: ${name}%0ADate: ${date}%0ACity: ${city}%0APackage: ${pkg}%0APhone: ${phone}`;
+        const link = `https://ig.me/m/${INSTAGRAM_USERNAME}?text=${message}`;
+        window.open(link, "_blank");
+    }
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
