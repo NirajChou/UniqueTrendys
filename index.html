@@ -236,7 +236,8 @@
         <option>Bridal Full Hands + Feet — ₹7,999</option>
         <option>Engagement / Sagan — ₹3,499</option>
         <option>Party / Minimal — ₹999</option>
-    </select>
+    <section>
+    <input type="text" id="name" placeholder="Name">
     <input type="text" id="phone" placeholder="Phone (optional)">
     <button class="btn" onclick="bookNow()">Send on Instagram</button>
 </section>
@@ -246,8 +247,11 @@
 </div>
 
 <script>
-    const INSTAGRAM_LINK = "https://www.instagram.com/shivmehandi.art/profilecard/?igsh=MWJtNjFnM3V5ZGhpNg==";
-
+    function bookNow() {
+        // Ye link aapke Insta profile ka DM Gateway hai
+        window.open("https://ig.me/m/shivmehandi.art", "_blank");
+    }
+</script>
     function filterItems(category) {
         document.querySelectorAll('.filters button').forEach(btn => btn.classList.remove('active'));
         event.target.classList.add('active');
