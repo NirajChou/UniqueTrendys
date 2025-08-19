@@ -73,20 +73,19 @@
     }
     .card {
         border-radius: 15px;
-        overflow: hidden;
+        overflow: hidden; /* fix: slider bahar na jaye */
         background: white;
         box-shadow: 0 3px 8px rgba(0,0,0,0.1);
-        transform: scale(0.95);
-        transition: transform 0.3s;
         position: relative;
     }
     .card:hover { transform: scale(1); }
     .slider {
         display: flex;
-        transition: transform 0.5s ease;
+        width: 100%;
+        transition: transform 0.5s ease-in-out;
     }
     .slider img {
-        width: 100%;
+        width: 100%; /* fix: ek image full width */
         height: 300px;
         object-fit: cover;
         flex-shrink: 0;
@@ -199,17 +198,9 @@
                 <img src="IMG-20250819-WA0004.jpg" alt="">
                 <img src="IMG-20250819-WA0005.jpg" alt="">
                 <img src="IMG-20250819-WA0006.jpg" alt="">
-                <img src="IMG-20250819-WA0006.jpg" alt="">
                 <img src="IMG-20250819-WA0007.jpg" alt="">
                 <img src="IMG-20250819-WA0008.jpg" alt="">
                 <img src="IMG-20250819-WA0009.jpg" alt="">
-
-
-
-
-
-
-
             </div>
             <button class="prev">&#10094;</button>
             <button class="next">&#10095;</button>
@@ -236,8 +227,7 @@
         <option>Bridal Full Hands + Feet — ₹7,999</option>
         <option>Engagement / Sagan — ₹3,499</option>
         <option>Party / Minimal — ₹999</option>
-    <section>
-    <input type="text" id="name" placeholder="Name">
+    </select>
     <input type="text" id="phone" placeholder="Phone (optional)">
     <button class="btn" onclick="bookNow()">Send on Instagram</button>
 </section>
@@ -247,11 +237,6 @@
 </div>
 
 <script>
-    function bookNow() {
-        // Direct Instagram DM link
-        window.location.href = "https://ig.me/m/shivmehandi.art";
-    }
-</script>
     function filterItems(category) {
         document.querySelectorAll('.filters button').forEach(btn => btn.classList.remove('active'));
         event.target.classList.add('active');
@@ -264,11 +249,12 @@
         });
     }
 
-    // Slider controls
+    // Slider controls (fixed)
     document.querySelectorAll('.card').forEach(card => {
         let index = 0;
         const slider = card.querySelector('.slider');
         const images = slider.querySelectorAll('img');
+
         card.querySelector('.prev').addEventListener('click', () => {
             index = (index - 1 + images.length) % images.length;
             slider.style.transform = `translateX(-${index * 100}%)`;
@@ -287,7 +273,7 @@
         const phone = document.getElementById("phone").value || "-";
 
         const message = `Hi! I'd like to book a mehndi session.%0AName: ${name}%0ADate: ${date}%0ACity: ${city}%0APackage: ${pkg}%0APhone: ${phone}`;
-        window.open(`${INSTAGRAM_LINK}&text=${message}`, "_blank");
+        window.open(`https://ig.me/m/shivmehandi.art?text=${message}`, "_blank");
     }
 
     document.getElementById("year").textContent = new Date().getFullYear();
